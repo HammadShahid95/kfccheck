@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "831483994792",
+    "project_id": "kfccheck-32eb6",
+    "storage_bucket": "kfccheck-32eb6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:831483994792:android:b3d3edd6a360703330d89d",
+        "android_client_info": {
+          "package_name": "com.example.kfccheck"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "831483994792-3b4d041dk09me5fdpvunrktaukge59k4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA9fx8MVhe5jW0Xad8bSu1JMAQZCim2W1o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "831483994792-3b4d041dk09me5fdpvunrktaukge59k4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
