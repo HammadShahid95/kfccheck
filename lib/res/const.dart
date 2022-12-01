@@ -30,3 +30,4 @@ const lightgray = Color(0xffD1D1D1);
 const GRay = Color(0xffBDBDBD);
 const GRAY = Color(0xff949292);
 const Sgrey = Color(0xffE8E8E8);
+const DBlack = Color(0xff000000);

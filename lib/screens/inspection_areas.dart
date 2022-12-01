@@ -193,50 +193,61 @@ class _InspectionState extends State<Inspection>{
                                      return GestureDetector(
                                        onTap: (){
                                          if(index==0){
-                                           Navigator.push(context, MaterialPageRoute(builder: (context)=>Documentation()));
+                                           Navigator.push(context, MaterialPageRoute(builder: (context)=>const Documentation()));
                                          }
                                          else if(index==1){
-                                           Navigator.push(context, MaterialPageRoute(builder: (context)=>Hygeine()));
+                                           Navigator.push(context, MaterialPageRoute(builder: (context)=>const Hygeine()));
                                          }
                                          else if(index==2){
-                                           Navigator.push(context, MaterialPageRoute(builder: (context)=>Sources()));
+                                           Navigator.push(context, MaterialPageRoute(builder: (context)=>const Sources()));
                                          }
                                          else if(index==3){
-                                           Navigator.push(context, MaterialPageRoute(builder: (context)=>Contamination()));
+                                           Navigator.push(context, MaterialPageRoute(builder: (context)=>const Contamination()));
                                          }
                                          else if(index==4){
-                                           Navigator.push(context, MaterialPageRoute(builder: (context)=>Sanitaiton()));
+                                           Navigator.push(context, MaterialPageRoute(builder: (context)=>const Sanitaiton()));
                                          }
                                          else if(index==5){
-                                           Navigator.push(context, MaterialPageRoute(builder: (context)=>Temprature()));
+                                           Navigator.push(context, MaterialPageRoute(builder: (context)=>const Temprature()));
                                          }
                                          else if(index==6){
-                                           Navigator.push(context, MaterialPageRoute(builder: (context)=>Equipment()));
+                                           Navigator.push(context, MaterialPageRoute(builder: (context)=>const Equipment()));
                                          }
                                          else if(index==7){
-                                           Navigator.push(context, MaterialPageRoute(builder: (context)=>Chemical()));
+                                           Navigator.push(context, MaterialPageRoute(builder: (context)=>const Chemical()));
                                          }
                                          else if(index==8){
-                                           Navigator.push(context, MaterialPageRoute(builder: (context)=>Pest()));
+                                           Navigator.push(context, MaterialPageRoute(builder: (context)=>const Pest()));
                                          }
                                          else if(index==9){
-                                           Navigator.push(context, MaterialPageRoute(builder: (context)=>Sewage()));
+                                           Navigator.push(context, MaterialPageRoute(builder: (context)=>const Sewage()));
                                          }
                                        },
-                                       child:Card(
-                                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
-                                         elevation: 0,
-                                         color: Colors.white,
-                                         child:  ListTile(
-                                           title: Text(areas[index],style:const TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Sblack),),
-                                           trailing:const Icon(Icons.arrow_forward_ios_outlined,color: black,size: 15,),
-                                           subtitle: LinearProgressIndicator(
-                                             backgroundColor: GREEN,
-                                             valueColor: new AlwaysStoppedAnimation<Color>(Colors.red),
-                                             value: _progressValue,
-                                           ),
+                                       child:Container(
+                                         child: Card(
+                                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+                                           elevation: 0,
+                                           color: Colors.white,
+                                           child: Column(children: [
+                                               Padding(
+                                                 padding: const EdgeInsets.only(top: 20,left: 10),
+                                                 child: Row(
+                                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                   children: [
+                                             Text(areas[index],style:const TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Sblack)),
+                                                const Icon(Icons.arrow_forward_ios_outlined,color: black,size: 15,),
+                                                 ],),
+                                               ),
+                                          const SizedBox(height: 20,),
+                                           LinearProgressIndicator(
+                                                 backgroundColor: GREEN,
+                                                 valueColor: new AlwaysStoppedAnimation<Color>(Colors.red),
+                                                 value: _progressValue,
+                                               ),
+
+                                             ],),
                                          ),
-                                       )
+                                       ),
                                      );
                                    }),
                              ),
@@ -257,11 +268,13 @@ class _InspectionState extends State<Inspection>{
                   child: Container(
                     width: 340,
                     height: 60,
-                    decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(8)),color: isFieldShow? Color.fromRGBO(142, 145, 140, 0.6): kala),
+                    decoration: BoxDecoration(borderRadius:const BorderRadius.all(Radius.circular(8)),color: isFieldShow?const Color.fromRGBO(142, 145, 140, 0.6): kala),
                     child:Center(child:  Text('Submit',style: TextStyle(fontSize: 22,fontWeight: FontWeight.w500,color:isFieldShow? white: Green ))),
                   ),
                   onTap: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>Done()));
+                    isFieldShow?
+                        Container()
+                   : Navigator.push(context, MaterialPageRoute(builder: (context)=>Done()));
                   },
                 ),
               ),

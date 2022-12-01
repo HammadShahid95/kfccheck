@@ -72,8 +72,11 @@ TextEditingController passwordController = TextEditingController();
              key: formKey,
              child: Column(
                children: [
-                 Image(image: AssetImage('asset/QA-icon.png', ), height: 150,width: 200, fit: BoxFit.cover,),
-                   SizedBox(height: 120),
+               const Padding(
+                  padding:  EdgeInsets.only(top: 60),
+                  child:  Image(image: AssetImage('asset/QA-icon.png', ), height: 150,width: 200, fit: BoxFit.cover,),
+                ),
+                  const SizedBox(height: 60),
                  Row(
 
                 children:const [
@@ -115,9 +118,9 @@ TextEditingController passwordController = TextEditingController();
                       obscureText: isShow,
                       decoration: InputDecoration(
 
-                          border: OutlineInputBorder(),
+                          border:const OutlineInputBorder(),
                           hintText: 'Password',
-                          hintStyle: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: lGrey),
+                          hintStyle:const TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: lGrey),
                           suffixIcon: GestureDetector(
                               onTap: (){
                                 setState(() {
@@ -133,20 +136,23 @@ TextEditingController passwordController = TextEditingController();
                         return null;
                       },
                     ),
-                    Row(
-                      children: [
-                        Checkbox(
-                          value: check,
-                          onChanged: (value) {
-                            setState(() {
-                              check = !check;
-                            });
-                          },
-                        ),
-                       const Expanded(
-                            child: Text('Keep me logged in',style: TextStyle(fontSize: 14,fontWeight: FontWeight.w400,color: lGrey),)),
-                        const Text('Forgot Password?',style: TextStyle(fontSize: 14,fontWeight: FontWeight.w500,color: kBoldColor),),
-                      ],
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 0),
+                      child: Row(
+                        children: [
+                          Checkbox(
+                            value: check,
+                            onChanged: (value) {
+                              setState(() {
+                                check = !check;
+                              });
+                            },
+                          ),
+                         const Expanded(
+                              child: Text('Keep me logged in',style: TextStyle(fontSize: 14,fontWeight: FontWeight.w400,color: lGrey),)),
+                          const Text('Forgot Password?',style: TextStyle(fontSize: 14,fontWeight: FontWeight.w500,color: kBoldColor),),
+                        ],
+                      ),
                     ),
                     const SizedBox(
                       height: 150,

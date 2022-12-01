@@ -20,6 +20,7 @@ class _SplashScreen extends State<SplashScreen> {
       body: SafeArea(
           child: Container(
         width: double.infinity,
+        height: 812,
         child: Stack(
           children: [
             Column(
@@ -34,7 +35,6 @@ class _SplashScreen extends State<SplashScreen> {
                       color: Colors.black),
                 ),
               ),
-
               Image(image: AssetImage('asset/rectangle.png')),
                 ]),
           const Positioned(

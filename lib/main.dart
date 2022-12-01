@@ -11,6 +11,7 @@ import 'package:kfccheck/screens/comment_screen.dart';
 import 'package:kfccheck/screens/done.dart';
 import 'package:kfccheck/screens/emergencies_reported.dart';
 import 'package:kfccheck/screens/inspection_areas.dart';
+import 'package:kfccheck/screens/loginpage.dart';
 import 'package:kfccheck/screens/navigationbar.dart';
 import 'package:kfccheck/screens/pest.dart';
 import 'package:kfccheck/screens/qa_walk.dart';
@@ -67,7 +68,7 @@ class MyApp extends StatelessWidget {
         '/fourtenth' : (context) =>  Done(),
         '/fifteenth' : (context) => Admin(),
       },
-      home:  Admin(),
+      home:  Loginpage(),
     );
   }
 }

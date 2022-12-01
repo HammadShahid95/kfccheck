@@ -17,31 +17,71 @@ class _Emergencies extends State<Emergencies> {
     'Reported to =',
     'Actions Taken=',
   ];
-  List<String> answers = ['Yes', 'No'];
-  int groupValue = -1;
-  bool? check1 = false;
-  bool? check2 = false;
-  bool? check3 = false;
-  bool? check4 = false;
 
   @override
   Widget build(BuildContext context) {
     return Background(
         title: 'Emergencies',
-        child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
-            child: Column(children: [
-              const SizedBox(
-                height: 20,
-              ),
-              Positioned(
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 120),
-                  child: Container(
-                    width:340,
+        child:Padding(
+          padding: const EdgeInsets.only(top: 120),
+          child: Container(
+            width: double.infinity,
+            decoration: BoxDecoration(borderRadius: BorderRadius.only(topLeft: Radius.circular(20),topRight: Radius.circular(20)),color: gray),
+            child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                child: Column(children: [
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 5),
+                    child: Container(
+                      width:340,
+                      height: 156,
+                      decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(6)),
+                          color: white),
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 20, left: 10),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: const [
+                            Text(
+                              'Type of Emergency:',
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w400,
+                                  color: Sblack),
+                            ),
+                            SizedBox(
+                              height: 15,
+                            ),
+                            Text('Reported to:',
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w400,
+                                    color: Sblack)),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Text('Action Taken:',
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w400,
+                                    color: Sblack)),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                 const SizedBox(
+                    height: 30,
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width,
                     height: 156,
                     decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(6)),
+                        borderRadius: BorderRadius.all(Radius.circular(4)),
                         color: white),
                     child: Padding(
                       padding: const EdgeInsets.only(top: 20, left: 10),
@@ -74,50 +114,11 @@ class _Emergencies extends State<Emergencies> {
                         ],
                       ),
                     ),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              Container(
-                width: MediaQuery.of(context).size.width,
-                height: 156,
-                decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(4)),
-                    color: white),
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 20, left: 10),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      Text(
-                        'Type of Emergency:',
-                        style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
-                            color: Sblack),
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      Text('Reported to:',
-                          style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400,
-                              color: Sblack)),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text('Action Taken:',
-                          style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400,
-                              color: Sblack)),
-                    ],
-                  ),
-                ),
-              )
-            ])));
+                  )
+                ])),
+
+          ),
+        ),
+    );
   }
 }

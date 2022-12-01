@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:kfccheck/res/const.dart';
+import 'package:kfccheck/screens/report_emergency.dart';
 
 class Roles extends StatefulWidget {
   @override
@@ -67,7 +69,17 @@ class _Roles extends State<Roles> {
                     ),
                   ),
                   onTap: () {
-                    Fluttertoast.showToast(msg: 'Task Assigned');
+                   var id = DateTime.now().microsecondsSinceEpoch;
+                   try{
+                     FirebaseFirestore.instance
+                         .collection('RGM')
+                         .doc('$id')
+                         .set({"Emergency": emergencySend.toString(),}
+                     );
+                     Fluttertoast.showToast(msg: 'Taskassigned');
+                   } catch(e){
+                     Fluttertoast.showToast(msg: 'error');
+                   }
                   },
                 ),
               ),
@@ -107,7 +119,17 @@ class _Roles extends State<Roles> {
                     ),
                   ),
                   onTap: () {
-                    Fluttertoast.showToast(msg: 'Task Assigned');
+                    var id = DateTime.now().microsecondsSinceEpoch;
+                    try{
+                      FirebaseFirestore.instance
+                          .collection('QA Head')
+                          .doc('$id')
+                          .set({"Emergency": emergencySend.toString(),}
+                      );
+                      Fluttertoast.showToast(msg: 'Taskassigned');
+                    } catch(e){
+                      Fluttertoast.showToast(msg: 'error');
+                    }
                   },
                 ),
               ),
@@ -147,7 +169,17 @@ class _Roles extends State<Roles> {
                     ),
                   ),
                   onTap: () {
-                    Fluttertoast.showToast(msg: 'Task Assigned');
+                    var id = DateTime.now().microsecondsSinceEpoch;
+                    try{
+                      FirebaseFirestore.instance
+                          .collection('Regional Head')
+                          .doc('$id')
+                          .set({"Emergency": emergencySend.toString(),}
+                      );
+                      Fluttertoast.showToast(msg: 'Taskassigned');
+                    } catch(e){
+                      Fluttertoast.showToast(msg: 'error');
+                    }
                   },
                 ),
               ),
@@ -187,7 +219,17 @@ class _Roles extends State<Roles> {
                     ),
                   ),
                   onTap: () {
-                    Fluttertoast.showToast(msg: 'Task Assigned');
+                    var id = DateTime.now().microsecondsSinceEpoch;
+                    try{
+                      FirebaseFirestore.instance
+                          .collection('Area Coach')
+                          .doc('$id')
+                          .set({"Emergency": emergencySend.toString(),}
+                      );
+                      Fluttertoast.showToast(msg: 'Taskassigned');
+                    } catch(e){
+                      Fluttertoast.showToast(msg: 'error');
+                    }
                   },
                 ),
               ),

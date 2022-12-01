@@ -69,7 +69,7 @@ File? imageFile;
             child: Column(children: [
               Stack(children: [
                 Container(
-                  width: 374,
+                  width: 414,
                   height: 204,
                   decoration: const BoxDecoration(color: kala),
                   child: Padding(
@@ -97,8 +97,8 @@ File? imageFile;
                     padding: const EdgeInsets.only(top: 120),
                     child: Expanded(
                       child: Container(
-                        width: 374,
-                        height: 580,
+                        width: 414,
+                        height: 600,
                         decoration: const BoxDecoration(
                           borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(20),
