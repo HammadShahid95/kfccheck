@@ -7,15 +7,15 @@ import 'package:kfccheck/res/static_info.dart';
 import 'package:kfccheck/screens/admindashboard.dart';
 import 'package:kfccheck/screens/qa_walk.dart';
 
-class Login extends StatefulWidget {
-  const Login({Key? key}) : super(key: key);
+class LogIn extends StatefulWidget {
+  const LogIn({Key? key}) : super(key: key);
 
   @override
-  State<Login> createState() => _LoginState();
+  State<LogIn> createState() => _LogInState();
 }
 
-class _LoginState extends State<Login> {
-  final User = FirebaseAuth.instance.currentUser;
+class _LogInState extends State<LogIn> {
+  final Aadmin = FirebaseAuth.instance.currentUser;
   bool isLoading = false;
   bool isShow = false;
   bool check = false;
@@ -28,11 +28,10 @@ class _LoginState extends State<Login> {
     bool userNameExists;
     bool passwordExists;
     try {
-      var authResult = await FirebaseFirestore.instance.collection(StaticInfo.users).where('email', isEqualTo: nameController.text).get();
+      var authResult = await FirebaseFirestore.instance.collection(StaticInfo.admin).where('email', isEqualTo: nameController.text).get();
       userNameExists = authResult.docs.isNotEmpty;
       if (userNameExists) {
-        var authResult =
-        await FirebaseFirestore.instance.collection(StaticInfo.users).where('password', isEqualTo: passwordController.text).get();
+        var authResult = await FirebaseFirestore.instance.collection(StaticInfo.admin).where('password', isEqualTo: passwordController.text).get();
         passwordExists = authResult.docs.isNotEmpty;
         if (passwordExists) {
           isLoading = false;
@@ -71,117 +70,124 @@ class _LoginState extends State<Login> {
               padding: const EdgeInsets.symmetric(horizontal: 35),
               child: Form(
                 key: formKey,
-                child: Column(
-                    children: [
-                      const Padding(
-                        padding:  EdgeInsets.only(top: 60),
-                        child:  Image(image: AssetImage('asset/QA-icon.png', ), height: 150,width: 200, fit: BoxFit.cover,),
+                child: Column(children: [
+                  const Padding(
+                    padding: EdgeInsets.only(top: 60),
+                    child: Image(
+                      image: AssetImage(
+                        'asset/QA-icon.png',
                       ),
-                      const SizedBox(height: 60),
-                      Row(
-
-                        children:const [
-                          Text('Welcome Back!',style: TextStyle(fontSize: 28,fontWeight: FontWeight.w500,color: kBoldColor),
-                            textAlign: TextAlign.start,
-                          ),
-
-                        ],),
-                      Row(
-                        children:const [
-                          Text('Enter your account details.',style: TextStyle(fontSize:16,fontWeight: FontWeight.w400,color: lGrey)),
-                        ],
+                      height: 150,
+                      width: 200,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  const SizedBox(height: 60),
+                  Row(
+                    children: const [
+                      Text(
+                        'Welcome Back!',
+                        style: TextStyle(fontSize: 28, fontWeight: FontWeight.w500, color: kBoldColor),
+                        textAlign: TextAlign.start,
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: const [
+                      Text('Enter your account details.', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: lGrey)),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Column(
+                    children: [
+                      TextFormField(
+                        controller: nameController,
+                        decoration: const InputDecoration(
+                          border: OutlineInputBorder(),
+                          hintText: 'Email',
+                          hintStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: lGrey),
+                        ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please Enter UserName';
+                          }
+                          return null;
+                        },
                       ),
                       const SizedBox(
                         height: 20,
                       ),
-                      Column(
-                        children: [
-                          TextFormField(
-                            controller: nameController,
-                            decoration:const InputDecoration(
-                              border: OutlineInputBorder(),
-                              hintText: 'Email',
-                              hintStyle: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: lGrey),
-                            ),
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Please Enter UserName';
-                              }
-                              return null;
-                            },
-
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          TextFormField(
-                            controller: passwordController,
-                            obscureText: isShow,
-                            decoration: InputDecoration(
-
-                                border:const OutlineInputBorder(),
-                                hintText: 'Password',
-                                hintStyle:const TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: lGrey),
-                                suffixIcon: GestureDetector(
-                                    onTap: (){
-                                      setState(() {
-                                        isShow= !isShow;
-                                      });
-                                    },
-                                    child: Icon(isShow?Icons.visibility:Icons.visibility_off))
-                            ),
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Please Enter password';
-                              }
-                              return null;
-                            },
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 0),
-                            child: Row(
-                              children: [
-                                Checkbox(
-                                  value: check,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      check = !check;
-                                    });
-                                  },
-                                ),
-                                const Expanded(
-                                    child: Text('Keep me logged in',style: TextStyle(fontSize: 14,fontWeight: FontWeight.w400,color: lGrey),)),
-                                const Text('Forgot Password?',style: TextStyle(fontSize: 14,fontWeight: FontWeight.w500,color: kBoldColor),),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 150,
-                          ),
-                          GestureDetector(
-                            onTap: (){
-                              if(formKey.currentState!.validate()){
-                                userLogin();
-
-                                //  Navigator.push(context, MaterialPageRoute(builder: (context)=>QA_walk()));
-                              }
-                            },
-                            child: Container(
-                              width: double.infinity,
-                              height: 60,
-                              decoration:const BoxDecoration(borderRadius:BorderRadius.all(Radius.circular(8)),color: black ),
-                              child:const Center(child: Text('Log In',style: TextStyle(fontSize: 22,fontWeight: FontWeight.w500,color: yellow))),
-                            ),
-                          ),
-                        ],
+                      TextFormField(
+                        controller: passwordController,
+                        obscureText: isShow,
+                        decoration: InputDecoration(
+                            border: const OutlineInputBorder(),
+                            hintText: 'Password',
+                            hintStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: lGrey),
+                            suffixIcon: GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    isShow = !isShow;
+                                  });
+                                },
+                                child: Icon(isShow ? Icons.visibility : Icons.visibility_off))),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please Enter password';
+                          }
+                          return null;
+                        },
                       ),
-                    ]),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 0),
+                        child: Row(
+                          children: [
+                            Checkbox(
+                              value: check,
+                              onChanged: (value) {
+                                setState(() {
+                                  check = !check;
+                                });
+                              },
+                            ),
+                            const Expanded(
+                                child: Text(
+                              'Keep me logged in',
+                              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: lGrey),
+                            )),
+                            const Text(
+                              'Forgot Password?',
+                              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: kBoldColor),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 150,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          if (formKey.currentState!.validate()) {
+                            userLogin();
+
+                            //  Navigator.push(context, MaterialPageRoute(builder: (context)=>QA_walk()));
+                          }
+                        },
+                        child: Container(
+                          width: double.infinity,
+                          height: 60,
+                          decoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(8)), color: black),
+                          child: const Center(child: Text('Log In', style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500, color: yellow))),
+                        ),
+                      ),
+                    ],
+                  ),
+                ]),
               )),
         ),
-
       ),
     );
   }
 }
-
-
