@@ -20,16 +20,13 @@ class _Roles extends State<Roles> {
             width: double.infinity,
             color: white,
             child: Padding(
-              padding: const EdgeInsets.only(left: 15, top: 60),
+              padding: const EdgeInsets.only(left: 15, top: 40),
               child: Row(
                 children: const [
                   Icon(Icons.warning, color: red),
                   Text(
                     'Report the Emergency to the following',
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                        color: black),
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: black),
                   )
                 ],
               ),
@@ -45,8 +42,7 @@ class _Roles extends State<Roles> {
                 padding: EdgeInsets.only(left: 20),
                 child: Text(
                   'RGM',
-                  style: TextStyle(
-                      fontSize: 16, fontWeight: FontWeight.w400, color: Sblack),
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: Sblack),
                 ),
               ),
               Padding(
@@ -55,31 +51,24 @@ class _Roles extends State<Roles> {
                   child: Container(
                     width: 73,
                     height: 29,
-                    decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(4)),
-                        color: black),
+                    decoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(4)), color: black),
                     child: const Center(
                       child: Text(
                         'Assign',
-                        style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
-                            color: gReen),
+                        style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500, color: gReen),
                       ),
                     ),
                   ),
                   onTap: () {
-                   var id = DateTime.now().microsecondsSinceEpoch;
-                   try{
-                     FirebaseFirestore.instance
-                         .collection('RGM')
-                         .doc('$id')
-                         .set({"Emergency": emergencySend.toString(),}
-                     );
-                     Fluttertoast.showToast(msg: 'Taskassigned');
-                   } catch(e){
-                     Fluttertoast.showToast(msg: 'error');
-                   }
+                    var id = DateTime.now().microsecondsSinceEpoch;
+                    try {
+                      FirebaseFirestore.instance.collection('RGM').doc('$id').set({
+                        "Emergency": emergencySend.toString(),
+                      });
+                      Fluttertoast.showToast(msg: 'Taskassigned');
+                    } catch (e) {
+                      Fluttertoast.showToast(msg: 'error');
+                    }
                   },
                 ),
               ),
@@ -95,8 +84,7 @@ class _Roles extends State<Roles> {
                 padding: EdgeInsets.only(left: 20),
                 child: Text(
                   'QA Head',
-                  style: TextStyle(
-                      fontSize: 16, fontWeight: FontWeight.w400, color: Sblack),
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: Sblack),
                 ),
               ),
               Padding(
@@ -105,29 +93,22 @@ class _Roles extends State<Roles> {
                   child: Container(
                     width: 73,
                     height: 29,
-                    decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(4)),
-                        color: black),
+                    decoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(4)), color: black),
                     child: const Center(
                       child: Text(
                         'Assign',
-                        style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
-                            color: gReen),
+                        style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500, color: gReen),
                       ),
                     ),
                   ),
                   onTap: () {
                     var id = DateTime.now().microsecondsSinceEpoch;
-                    try{
-                      FirebaseFirestore.instance
-                          .collection('QA Head')
-                          .doc('$id')
-                          .set({"Emergency": emergencySend.toString(),}
-                      );
+                    try {
+                      FirebaseFirestore.instance.collection('QA Head').doc('$id').set({
+                        "Emergency": emergencySend.toString(),
+                      });
                       Fluttertoast.showToast(msg: 'Taskassigned');
-                    } catch(e){
+                    } catch (e) {
                       Fluttertoast.showToast(msg: 'error');
                     }
                   },
@@ -145,8 +126,7 @@ class _Roles extends State<Roles> {
                 padding: EdgeInsets.only(left: 20),
                 child: Text(
                   'Regional Head',
-                  style: TextStyle(
-                      fontSize: 16, fontWeight: FontWeight.w400, color: Sblack),
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: Sblack),
                 ),
               ),
               Padding(
@@ -155,29 +135,22 @@ class _Roles extends State<Roles> {
                   child: Container(
                     width: 73,
                     height: 29,
-                    decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(4)),
-                        color: black),
+                    decoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(4)), color: black),
                     child: const Center(
                       child: Text(
                         'Assign',
-                        style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
-                            color: gReen),
+                        style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500, color: gReen),
                       ),
                     ),
                   ),
                   onTap: () {
                     var id = DateTime.now().microsecondsSinceEpoch;
-                    try{
-                      FirebaseFirestore.instance
-                          .collection('Regional Head')
-                          .doc('$id')
-                          .set({"Emergency": emergencySend.toString(),}
-                      );
+                    try {
+                      FirebaseFirestore.instance.collection('Regional Head').doc('$id').set({
+                        "Emergency": emergencySend.toString(),
+                      });
                       Fluttertoast.showToast(msg: 'Taskassigned');
-                    } catch(e){
+                    } catch (e) {
                       Fluttertoast.showToast(msg: 'error');
                     }
                   },
@@ -195,8 +168,7 @@ class _Roles extends State<Roles> {
                 padding: EdgeInsets.only(left: 20),
                 child: Text(
                   'Area Coach',
-                  style: TextStyle(
-                      fontSize: 16, fontWeight: FontWeight.w400, color: Sblack),
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: Sblack),
                 ),
               ),
               Padding(
@@ -205,29 +177,22 @@ class _Roles extends State<Roles> {
                   child: Container(
                     width: 73,
                     height: 29,
-                    decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(4)),
-                        color: black),
+                    decoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(4)), color: black),
                     child: const Center(
                       child: Text(
                         'Assign',
-                        style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
-                            color: gReen),
+                        style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500, color: gReen),
                       ),
                     ),
                   ),
                   onTap: () {
                     var id = DateTime.now().microsecondsSinceEpoch;
-                    try{
-                      FirebaseFirestore.instance
-                          .collection('Area Coach')
-                          .doc('$id')
-                          .set({"Emergency": emergencySend.toString(),}
-                      );
+                    try {
+                      FirebaseFirestore.instance.collection('Area Coach').doc('$id').set({
+                        "Emergency": emergencySend.toString(),
+                      });
                       Fluttertoast.showToast(msg: 'Taskassigned');
-                    } catch(e){
+                    } catch (e) {
                       Fluttertoast.showToast(msg: 'error');
                     }
                   },

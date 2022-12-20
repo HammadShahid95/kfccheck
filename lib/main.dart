@@ -3,9 +3,12 @@ import 'package:camera/camera.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:kfccheck/crud/add_user.dart';
 import 'package:kfccheck/login.dart';
+import 'package:kfccheck/screens/Signup_page.dart';
 import 'package:kfccheck/screens/actions.dart';
 import 'package:kfccheck/screens/admindashboard.dart';
+import 'package:kfccheck/screens/adminlogin.dart';
 import 'package:kfccheck/screens/anomalies.dart';
 import 'package:kfccheck/screens/comment_screen.dart';
 import 'package:kfccheck/screens/done.dart';
@@ -13,6 +16,7 @@ import 'package:kfccheck/screens/emergencies_reported.dart';
 import 'package:kfccheck/screens/inspection_areas.dart';
 import 'package:kfccheck/screens/loginpage.dart';
 import 'package:kfccheck/screens/navigationbar.dart';
+import 'package:kfccheck/screens/payment_screen.dart';
 import 'package:kfccheck/screens/pest.dart';
 import 'package:kfccheck/screens/qa_walk.dart';
 import 'package:kfccheck/screens/report_emergency.dart';
@@ -28,6 +32,7 @@ import 'screens/contamination.dart';
 import 'screens/documentation.dart';
 import 'screens/equipement.dart';
 import 'screens/hygeine.dart';
+
 List<CameraDescription>? cameras;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -52,10 +57,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       // initialRoute: '/',
       routes: {
-         // '/': (context) => SplashScreen(),
+        // '/': (context) => SplashScreen(),
         '/second': (context) => const QA_walk(),
         '/third': (context) => Branches(),
-         '/fourth': (context) => const Documentation(),
+        '/fourth': (context) => const Documentation(),
         '/fifth': (context) => const Hygeine(),
         '/sixth': (context) => const Sources(),
         '/seventh': (context) => const Contamination(),
@@ -65,10 +70,10 @@ class MyApp extends StatelessWidget {
         '/eleventh': (context) => const Chemical(),
         '/twelwth': (context) => const Pest(),
         '/thirteenth': (context) => const Sewage(),
-        '/fourtenth' : (context) =>  Done(),
-        '/fifteenth' : (context) => Admin(),
+        '/fourtenth': (context) => Done(),
+        '/fifteenth': (context) => Admin(),
       },
-      home:  Loginpage(),
+      home: PaymentMethod(),
     );
   }
 }

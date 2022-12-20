@@ -26,48 +26,22 @@ class _HygeineState extends State<Hygeine> {
     QuestionModel(
         answers: ['Yes', 'No', 'N/A', 'N/O'],
         comments: '',
-        question:
-            'Team member must not be observed  working with symptoms of illness or infection?'),
+        question: 'Team member must not be observed  working with symptoms of illness or infection?'),
+    QuestionModel(answers: ['Yes', 'No', 'N/A', 'N/O'], comments: '', question: 'Team members meet grooming and personal hygeine standards?'),
+    QuestionModel(answers: ['Yes', 'No', 'N/A', 'N/O'], comments: '', question: 'Drinking,eating and smoking use only in designated non-food areas?'),
+    QuestionModel(answers: ['Yes', 'No', 'N/A', 'N/O'], comments: '', question: 'Gloves and blue bandages available in the restaurant?'),
     QuestionModel(
         answers: ['Yes', 'No', 'N/A', 'N/O'],
         comments: '',
-        question: 'Team members meet grooming and personal hygeine standards?'),
+        question: 'Proper hair Nets and Beard Mask (if required)  worn by all team members and visitors before entering operations area?'),
+    QuestionModel(answers: ['Yes', 'No', 'N/A', 'N/O'], comments: '', question: 'No jewelry worn when handling food?'),
     QuestionModel(
         answers: ['Yes', 'No', 'N/A', 'N/O'],
         comments: '',
-        question:
-            'Drinking,eating and smoking use only in designated non-food areas?'),
-    QuestionModel(
-        answers: ['Yes', 'No', 'N/A', 'N/O'],
-        comments: '',
-        question: 'Gloves and blue bandages available in the restaurant?'),
-    QuestionModel(
-        answers: ['Yes', 'No', 'N/A', 'N/O'],
-        comments: '',
-        question:
-            'Proper hair Nets and Beard Mask (if required)  worn by all team members and visitors before entering operations area?'),
-    QuestionModel(
-        answers: ['Yes', 'No', 'N/A', 'N/O'],
-        comments: '',
-        question: 'No jewelry worn when handling food?'),
-    QuestionModel(
-        answers: ['Yes', 'No', 'N/A', 'N/O'],
-        comments: '',
-        question:
-            'Proper hand-washing observed when required. (FS-Critical) (Wash, Rinse, Dry, Sanitize)?'),
-    QuestionModel(
-        answers: ['Yes', 'No', 'N/A', 'N/O'],
-        comments: '',
-        question: 'Proper hand-washing procedures followed?'),
-    QuestionModel(
-        answers: ['Yes', 'No', 'N/A', 'N/O'],
-        comments: '',
-        question:
-            'Proper disposable gloves and blue bandage procedures followed?'),
-    QuestionModel(
-        answers: ['Yes', 'No', 'N/A', 'N/O'],
-        comments: '',
-        question: 'Hand washing sink used only for hand washing?'),
+        question: 'Proper hand-washing observed when required. (FS-Critical) (Wash, Rinse, Dry, Sanitize)?'),
+    QuestionModel(answers: ['Yes', 'No', 'N/A', 'N/O'], comments: '', question: 'Proper hand-washing procedures followed?'),
+    QuestionModel(answers: ['Yes', 'No', 'N/A', 'N/O'], comments: '', question: 'Proper disposable gloves and blue bandage procedures followed?'),
+    QuestionModel(answers: ['Yes', 'No', 'N/A', 'N/O'], comments: '', question: 'Hand washing sink used only for hand washing?'),
   ];
   File? imageFile;
   getFromCamera() async {
@@ -82,6 +56,7 @@ class _HygeineState extends State<Hygeine> {
       });
     }
   }
+
   CollectionReference users = FirebaseFirestore.instance.collection('practices');
   @override
   Widget build(BuildContext context) {
@@ -97,24 +72,18 @@ class _HygeineState extends State<Hygeine> {
                   height: 204,
                   decoration: const BoxDecoration(color: black),
                   child: Padding(
-                    padding:const EdgeInsets.only(left: 10,bottom: 80),
+                    padding: const EdgeInsets.only(left: 10, bottom: 80),
                     child: Row(
                       children: [
                         InkWell(
-                          child:const Icon(Icons.arrow_back_ios, color: white),
+                          child: const Icon(Icons.arrow_back_ios, color: white),
                           onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Inspection()));
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => Inspection()));
                           },
                         ),
-                       const Text(
+                        const Text(
                           'Hygeine Practices',
-                          style: TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.w500,
-                              color: Dgreen),
+                          style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500, color: Dgreen),
                         )
                       ],
                     ),
@@ -127,16 +96,12 @@ class _HygeineState extends State<Hygeine> {
                       width: 414,
                       height: 600,
                       decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(20),
-                            topRight: Radius.circular(20)),
+                        borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20)),
                         color: gray,
                       ),
-                      child:FutureBuilder<DocumentSnapshot>(
+                      child: FutureBuilder<DocumentSnapshot>(
                         future: users.doc("BE2oWA5K7EJIWuYeEILR").get(),
-                        builder:
-                            (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
-
+                        builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
                           if (snapshot.hasError) {
                             return Text("Something went wrong");
                           }
@@ -153,10 +118,9 @@ class _HygeineState extends State<Hygeine> {
                                 itemCount: 10,
                                 itemBuilder: (Context, index) {
                                   return Padding(
-                                    padding: const EdgeInsets.only(top: 10,left: 10,right: 10),
+                                    padding: const EdgeInsets.only(top: 10, left: 10, right: 10),
                                     child: Card(
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(4)),
+                                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
                                       elevation: 0,
                                       color: Colors.white,
                                       child: Padding(
@@ -168,10 +132,7 @@ class _HygeineState extends State<Hygeine> {
                                             ),
                                             Text(
                                               data['ips'][index]['question'],
-                                              style: const TextStyle(
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.w400,
-                                                  color: Sblack),
+                                              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: Sblack),
                                             ),
                                             Row(
                                               children: [
@@ -179,67 +140,70 @@ class _HygeineState extends State<Hygeine> {
                                                   data: Theme.of(context).copyWith(
                                                     unselectedWidgetColor: Colors.grey[500],
                                                   ),
-                                                  child:Checkbox(
-                                                    value: questions[index].selectedAnswer?.toLowerCase()=='yes' ,
+                                                  child: Checkbox(
+                                                    value: questions[index].selectedAnswer?.toLowerCase() == 'yes',
                                                     onChanged: (value) {
                                                       setState(() {
-                                                        questions[index].selectedAnswer='yes' ;
+                                                        questions[index].selectedAnswer = 'yes';
                                                       });
                                                     },
-                                                    shape:const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(3))),
+                                                    shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(3))),
                                                   ),
                                                 ),
-                                                const Text('Yes',style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Black)),
-
+                                                const Text('Yes', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: Black)),
                                                 Theme(
                                                   data: Theme.of(context).copyWith(
                                                     unselectedWidgetColor: Colors.grey[500],
                                                   ),
-                                                  child:Checkbox(
-                                                    value:  questions[index].selectedAnswer?.toLowerCase()=='no',
+                                                  child: Checkbox(
+                                                    value: questions[index].selectedAnswer?.toLowerCase() == 'no',
                                                     onChanged: (value) {
                                                       setState(() {
-                                                        questions[index].selectedAnswer='no' ;
+                                                        questions[index].selectedAnswer = 'no';
                                                       });
                                                     },
-                                                    shape:const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(3))),
+                                                    shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(3))),
                                                   ),
                                                 ),
-                                                const  Text('No',style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Black),
+                                                const Text(
+                                                  'No',
+                                                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: Black),
                                                 ),
-
                                                 Theme(
                                                   data: Theme.of(context).copyWith(
                                                     unselectedWidgetColor: Colors.grey[500],
                                                   ),
-                                                  child:Checkbox(
-                                                    value:  questions[index].selectedAnswer?.toLowerCase()=='n/a' ,
+                                                  child: Checkbox(
+                                                    value: questions[index].selectedAnswer?.toLowerCase() == 'n/a',
                                                     onChanged: (value) {
                                                       setState(() {
-                                                        questions[index].selectedAnswer='n/a' ;
+                                                        questions[index].selectedAnswer = 'n/a';
                                                       });
                                                     },
-                                                    shape:const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(3))),
+                                                    shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(3))),
                                                   ),
                                                 ),
-                                                const  Text('N/A',style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Black),
+                                                const Text(
+                                                  'N/A',
+                                                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: Black),
                                                 ),
-
                                                 Theme(
                                                   data: Theme.of(context).copyWith(
                                                     unselectedWidgetColor: Colors.grey[500],
                                                   ),
-                                                  child:Checkbox(
-                                                    value:  questions[index].selectedAnswer?.toLowerCase()=='n/o' ,
+                                                  child: Checkbox(
+                                                    value: questions[index].selectedAnswer?.toLowerCase() == 'n/o',
                                                     onChanged: (value) {
                                                       setState(() {
-                                                        questions[index].selectedAnswer='n/o' ;
+                                                        questions[index].selectedAnswer = 'n/o';
                                                       });
                                                     },
-                                                    shape:const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(3))),
+                                                    shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(3))),
                                                   ),
                                                 ),
-                                                const  Text('N/O',style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Black),
+                                                const Text(
+                                                  'N/O',
+                                                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: Black),
                                                 ),
                                               ],
                                             ),
@@ -250,18 +214,22 @@ class _HygeineState extends State<Hygeine> {
                                                   child: Container(
                                                     width: 67,
                                                     height: 20,
-                                                    decoration:const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10)),color: Silver
-                                                    ),
+                                                    decoration:
+                                                        const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10)), color: Silver),
                                                     child: Row(
                                                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                                      children:const [
-                                                        Icon(Icons.person,color: white,size: 15),
-                                                        Center(child: Text('Task',style: TextStyle(fontSize: 10,fontWeight: FontWeight.w400,color: white),))
+                                                      children: const [
+                                                        Icon(Icons.person, color: white, size: 15),
+                                                        Center(
+                                                            child: Text(
+                                                          'Task',
+                                                          style: TextStyle(fontSize: 10, fontWeight: FontWeight.w400, color: white),
+                                                        ))
                                                       ],
                                                     ),
                                                   ),
-                                                  onTap: (){
-                                                    Navigator.push(context, MaterialPageRoute(builder: (context)=> Roles()));
+                                                  onTap: () {
+                                                    Navigator.push(context, MaterialPageRoute(builder: (context) => Roles()));
                                                   },
                                                 ),
                                                 SizedBox(
@@ -270,19 +238,20 @@ class _HygeineState extends State<Hygeine> {
                                                 Container(
                                                   width: 67,
                                                   height: 20,
-                                                  decoration:const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10)),color: Silver
-                                                  ),
+                                                  decoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10)), color: Silver),
                                                   child: Row(
                                                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                                     children: [
                                                       InkWell(
-                                                        onTap: (){
+                                                        onTap: () {
                                                           getFromCamera();
                                                         },
-                                                        child: Icon(Icons.camera_alt_outlined,color: white,size: 15),
-
+                                                        child: Icon(Icons.camera_alt_outlined, color: white, size: 15),
                                                       ),
-                                                      Text('Image',style: TextStyle(fontSize: 10,fontWeight: FontWeight.w400,color: white),)
+                                                      Text(
+                                                        'Image',
+                                                        style: TextStyle(fontSize: 10, fontWeight: FontWeight.w400, color: white),
+                                                      )
                                                     ],
                                                   ),
                                                 ),
@@ -293,18 +262,21 @@ class _HygeineState extends State<Hygeine> {
                                                   child: Container(
                                                     width: 67,
                                                     height: 20,
-                                                    decoration:const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10)),color: Silver
-                                                    ),
+                                                    decoration:
+                                                        const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10)), color: Silver),
                                                     child: Row(
                                                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                                      children:const [
-                                                        Icon(Icons.message,color: white,size: 15),
-                                                        Text('Notes',style: TextStyle(fontSize: 10,fontWeight: FontWeight.w400,color: white),),
+                                                      children: const [
+                                                        Icon(Icons.message, color: white, size: 15),
+                                                        Text(
+                                                          'Notes',
+                                                          style: TextStyle(fontSize: 10, fontWeight: FontWeight.w400, color: white),
+                                                        ),
                                                       ],
                                                     ),
                                                   ),
-                                                  onTap: (){
-                                                    Navigator.push(context, MaterialPageRoute(builder: (context)=> CommentsScreen()));
+                                                  onTap: () {
+                                                    Navigator.push(context, MaterialPageRoute(builder: (context) => CommentsScreen()));
                                                   },
                                                 ),
                                               ],
@@ -322,11 +294,14 @@ class _HygeineState extends State<Hygeine> {
 
                           }
 
-                          return Center(child: Column(
+                          return Center(
+                              child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children:const [
+                            children: const [
                               Text("loading...."),
-                              SizedBox(height: 10,),
+                              SizedBox(
+                                height: 10,
+                              ),
                               CircularProgressIndicator(),
                             ],
                           ));

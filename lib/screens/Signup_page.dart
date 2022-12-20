@@ -2,38 +2,38 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:kfccheck/login.dart';
 import 'package:kfccheck/res/const.dart';
 import 'package:kfccheck/res/static_info.dart';
-import 'package:kfccheck/screens/admindashboard.dart';
 import 'package:kfccheck/screens/qa_walk.dart';
 
-class LogIn extends StatefulWidget {
-  const LogIn({Key? key}) : super(key: key);
+class Signup extends StatefulWidget {
+  const Signup({Key? key}) : super(key: key);
 
   @override
-  State<LogIn> createState() => _LogInState();
+  State<Signup> createState() => _SignupState();
 }
 
-class _LogInState extends State<LogIn> {
-  final Aadmin = FirebaseAuth.instance.currentUser;
+class _SignupState extends State<Signup> {
+  final User = FirebaseAuth.instance.currentUser;
   bool isLoading = false;
   bool isShow = false;
   bool check = false;
-  TextEditingController nameController = TextEditingController();
+  TextEditingController firstnameController = TextEditingController();
+  TextEditingController lastnameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  TextEditingController usernamecontroler = TextEditingController();
 
   userLogin() async {
-    print("start");
     isLoading = true;
     setState(() {});
     bool userNameExists;
     bool passwordExists;
     try {
-      var authResult = await FirebaseFirestore.instance.collection(StaticInfo.admin).where('email', isEqualTo: nameController.text).get();
+      var authResult = await FirebaseFirestore.instance.collection(StaticInfo.users).where('email', isEqualTo: emailController.text).get();
       userNameExists = authResult.docs.isNotEmpty;
       if (userNameExists) {
-        var authResult = await FirebaseFirestore.instance.collection(StaticInfo.admin).where('password', isEqualTo: passwordController.text).get();
+        var authResult = await FirebaseFirestore.instance.collection(StaticInfo.users).where('password', isEqualTo: passwordController.text).get();
         passwordExists = authResult.docs.isNotEmpty;
         if (passwordExists) {
           isLoading = false;
@@ -41,7 +41,7 @@ class _LogInState extends State<LogIn> {
           Fluttertoast.showToast(msg: 'Successfully logged in');
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => Admin()),
+            MaterialPageRoute(builder: (context) => QA_walk()),
           );
         } else {
           isLoading = false;
@@ -74,7 +74,7 @@ class _LogInState extends State<LogIn> {
                 key: formKey,
                 child: Column(children: [
                   const Padding(
-                    padding: EdgeInsets.only(top: 60),
+                    padding: EdgeInsets.only(top: 20),
                     child: Image(
                       image: AssetImage(
                         'asset/QA-icon.png',
@@ -84,20 +84,10 @@ class _LogInState extends State<LogIn> {
                       fit: BoxFit.cover,
                     ),
                   ),
-                  const SizedBox(height: 60),
-                  Row(
-                    children: const [
-                      Text(
-                        'Welcome Back!',
-                        style: TextStyle(fontSize: 28, fontWeight: FontWeight.w500, color: kBoldColor),
-                        textAlign: TextAlign.start,
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: const [
-                      Text('Enter your account details.', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: lGrey)),
-                    ],
+                  const Text(
+                    'Sign Up!',
+                    style: TextStyle(fontSize: 28, fontWeight: FontWeight.w500, color: kBoldColor),
+                    textAlign: TextAlign.start,
                   ),
                   const SizedBox(
                     height: 20,
@@ -105,7 +95,7 @@ class _LogInState extends State<LogIn> {
                   Column(
                     children: [
                       TextFormField(
-                        controller: nameController,
+                        controller: emailController,
                         decoration: const InputDecoration(
                           border: OutlineInputBorder(),
                           hintText: 'Email',
@@ -114,6 +104,40 @@ class _LogInState extends State<LogIn> {
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Please Enter UserName';
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      TextFormField(
+                        controller: firstnameController,
+                        decoration: const InputDecoration(
+                          border: OutlineInputBorder(),
+                          hintText: 'First Name',
+                          hintStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: lGrey),
+                        ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please Enter First Name';
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      TextFormField(
+                        controller: lastnameController,
+                        decoration: const InputDecoration(
+                          border: OutlineInputBorder(),
+                          hintText: 'Last Name',
+                          hintStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: lGrey),
+                        ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please Enter Last Name';
                           }
                           return null;
                         },
@@ -142,51 +166,52 @@ class _LogInState extends State<LogIn> {
                           return null;
                         },
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 0),
-                        child: Row(
-                          children: [
-                            Checkbox(
-                              value: check,
-                              onChanged: (value) {
-                                setState(() {
-                                  check = !check;
-                                });
-                              },
-                            ),
-                            const Expanded(
-                                child: Text(
-                              'Keep me logged in',
-                              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: lGrey),
-                            )),
-                            const Text(
-                              'Forgot Password?',
-                              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: kBoldColor),
-                            ),
-                          ],
-                        ),
-                      ),
                       const SizedBox(
-                        height: 150,
+                        height: 50,
                       ),
-                      isLoading
-                          ? CircularProgressIndicator()
-                          : GestureDetector(
-                              onTap: () {
-                                if (formKey.currentState!.validate()) {
-                                  userLogin();
+                      GestureDetector(
+                        onTap: () {
+                          if (formKey.currentState!.validate()) {
+                            userLogin();
 
-                                  //  Navigator.push(context, MaterialPageRoute(builder: (context)=>QA_walk()));
-                                }
-                              },
+                            //  Navigator.push(context, MaterialPageRoute(builder: (context)=>QA_walk()));
+                          }
+                        },
+                        child: Column(
+                          children: [
+                            GestureDetector(
                               child: Container(
                                 width: double.infinity,
                                 height: 60,
                                 decoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(8)), color: black),
                                 child:
-                                    const Center(child: Text('Log In', style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500, color: yellow))),
+                                    const Center(child: Text('Sign Up', style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500, color: yellow))),
+                              ),
+                              onTap: () {
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
+                              },
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 20, top: 10),
+                              child: Row(
+                                children: const [
+                                  Text(
+                                    'Already have an account?',
+                                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: lGrey),
+                                  ),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Text(
+                                    'Log In',
+                                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: kala),
+                                  )
+                                ],
                               ),
                             ),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                 ]),
