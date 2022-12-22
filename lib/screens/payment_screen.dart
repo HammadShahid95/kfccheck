@@ -22,113 +22,122 @@ class _PaymentMethod extends State<PaymentMethod> {
             children: [
               Column(
                 children: [
-                  Stack(
-                    children: [
-                      Container(
-                        width: 414,
-                        height: 206,
-                        decoration: const BoxDecoration(color: kala),
-                        child: const Padding(
-                          padding: EdgeInsets.only(top: 60, left: 10),
-                          child: Text(
-                            'Payment',
-                            style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500, color: Dgreen),
-                          ),
+                  Stack(children: [
+                    Container(
+                      width: 414,
+                      height: 206,
+                      decoration: const BoxDecoration(color: kala),
+                      child: const Padding(
+                        padding: EdgeInsets.only(top: 60, left: 10),
+                        child: Text(
+                          'Payment',
+                          style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500, color: Dgreen),
                         ),
                       ),
-                      Positioned(
-                        child: Padding(
-                          padding: const EdgeInsets.only(top: 120),
-                          child: Container(
-                            width: MediaQuery.of(context).size.width,
-                            height: 629,
-                            decoration: const BoxDecoration(
-                              borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20)),
-                              color: gray,
-                            ),
-                            child: Form(
-                              child: Padding(
-                                padding: const EdgeInsets.all(16),
-                                child: Column(
+                    ),
+                    Positioned(
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 120),
+                        child: Container(
+                          width: MediaQuery.of(context).size.width,
+                          height: 629,
+                          decoration: const BoxDecoration(
+                            borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+                            color: gray,
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(12.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  'Card Number',
+                                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: kala),
+                                ),
+                                Row(
                                   children: [
-                                    TextFormField(
-                                      keyboardType: TextInputType.number,
-                                      inputFormatters: [
-                                        FilteringTextInputFormatter.digitsOnly,
-                                        LengthLimitingTextInputFormatter(19),
-                                      ],
-                                      decoration: const InputDecoration(
-                                          border: OutlineInputBorder(), hintText: "Card number", prefixIcon: Icon(Icons.credit_card)),
-                                    ),
-                                    const SizedBox(
-                                      height: 20,
-                                    ),
-                                    TextFormField(
-                                      decoration: const InputDecoration(
-                                        border: OutlineInputBorder(),
-                                        hintText: "Full Name",
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      height: 20,
-                                    ),
-                                    TextFormField(
-                                      decoration: const InputDecoration(
-                                        border: OutlineInputBorder(),
-                                        hintText: "Expiry Time",
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      height: 20,
-                                    ),
-                                    TextFormField(
-                                      decoration: const InputDecoration(
-                                        border: OutlineInputBorder(),
-                                        hintText: "CVV",
-                                      ),
-                                    ),
-                                    Row(
-                                      children: [
-                                        Checkbox(
-                                          value: check,
-                                          onChanged: (value) {
-                                            setState(() {
-                                              check = !check;
-                                            });
-                                          },
+                                    Container(
+                                      width: 75,
+                                      height: 33,
+                                      decoration:
+                                          BoxDecoration(borderRadius: const BorderRadius.all(Radius.circular(4)), border: Border.all(color: lGrey)),
+                                      child: TextFormField(
+                                        keyboardType: TextInputType.number,
+                                        inputFormatters: [
+                                          FilteringTextInputFormatter.digitsOnly,
+                                          LengthLimitingTextInputFormatter(19),
+                                        ],
+                                        decoration: const InputDecoration(
+                                          hintText: "****",
                                         ),
-                                        const Expanded(
-                                            child: Text(
-                                          'Save information for your future payments',
-                                          style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: lGrey),
-                                        )),
-                                      ],
+                                      ),
                                     ),
                                     const SizedBox(
-                                      height: 160,
+                                      width: 10,
                                     ),
-                                    GestureDetector(
-                                      child: Container(
-                                        width: double.infinity,
-                                        height: 60,
-                                        decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(8)), color: black),
-                                        child: Center(
-                                            child:
-                                                Text('Proceed Payment', style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500, color: yellow))),
+                                    Container(
+                                      width: 75,
+                                      height: 33,
+                                      decoration:
+                                          BoxDecoration(borderRadius: const BorderRadius.all(Radius.circular(4)), border: Border.all(color: lGrey)),
+                                      child: TextFormField(
+                                        keyboardType: TextInputType.number,
+                                        inputFormatters: [
+                                          FilteringTextInputFormatter.digitsOnly,
+                                          LengthLimitingTextInputFormatter(19),
+                                        ],
+                                        decoration: const InputDecoration(
+                                          hintText: "****",
+                                        ),
                                       ),
-                                      onTap: (() {
-                                        //  Navigator.push(context, MaterialPageRoute(builder: (context)=> ));
-                                      }),
+                                    ),
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                                    Container(
+                                      width: 75,
+                                      height: 33,
+                                      decoration:
+                                          BoxDecoration(borderRadius: const BorderRadius.all(Radius.circular(4)), border: Border.all(color: lGrey)),
+                                      child: TextFormField(
+                                        keyboardType: TextInputType.number,
+                                        inputFormatters: [
+                                          FilteringTextInputFormatter.digitsOnly,
+                                          LengthLimitingTextInputFormatter(19),
+                                        ],
+                                        decoration: const InputDecoration(
+                                          hintText: "****",
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                                    Container(
+                                      width: 75,
+                                      height: 33,
+                                      decoration:
+                                          BoxDecoration(borderRadius: const BorderRadius.all(Radius.circular(4)), border: Border.all(color: lGrey)),
+                                      child: TextFormField(
+                                        keyboardType: TextInputType.number,
+                                        inputFormatters: [
+                                          FilteringTextInputFormatter.digitsOnly,
+                                          LengthLimitingTextInputFormatter(19),
+                                        ],
+                                        decoration: const InputDecoration(
+                                          hintText: "****",
+                                        ),
+                                      ),
                                     ),
                                   ],
                                 ),
-                              ),
+                              ],
                             ),
                           ),
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ]),
                 ],
               ),
             ],

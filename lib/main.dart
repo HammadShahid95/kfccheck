@@ -19,8 +19,6 @@ import 'package:kfccheck/screens/navigationbar.dart';
 import 'package:kfccheck/screens/payment_screen.dart';
 import 'package:kfccheck/screens/pest.dart';
 import 'package:kfccheck/screens/qa_walk.dart';
-import 'package:kfccheck/screens/report_emergency.dart';
-import 'package:kfccheck/screens/roles.dart';
 import 'package:kfccheck/screens/sanitation.dart';
 import 'package:kfccheck/screens/sources.dart';
 import 'package:kfccheck/screens/splash_screen.dart';
@@ -73,7 +71,7 @@ class MyApp extends StatelessWidget {
         '/fourtenth': (context) => Done(),
         '/fifteenth': (context) => Admin(),
       },
-      home: PaymentMethod(),
+      home: SplashScreen(),
     );
   }
 }

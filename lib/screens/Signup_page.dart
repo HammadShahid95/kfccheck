@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:kfccheck/login.dart';
 import 'package:kfccheck/res/const.dart';
@@ -19,12 +20,38 @@ class _SignupState extends State<Signup> {
   bool isLoading = false;
   bool isShow = false;
   bool check = false;
-  TextEditingController firstnameController = TextEditingController();
-  TextEditingController lastnameController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  userLogin() async {
+  FlutterSecureStorage secureStorage = FlutterSecureStorage();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getValues();
+  }
+
+  void getValues() async {
+    nameController.text = await getValue("Name");
+    emailController.text = await getValue("Email");
+  }
+
+  Future<void> save(String key, String value) async {
+    await secureStorage.write(key: key, value: value);
+  }
+
+  Future<String> getValue(String key) async {
+    return await secureStorage.read(key: key) ?? "";
+  }
+
+  void saveDetails() {
+    save("Name", nameController.text);
+    save("Email", emailController.text);
+  }
+
+  registerEmail() async {
     isLoading = true;
     setState(() {});
     bool userNameExists;
@@ -112,32 +139,15 @@ class _SignupState extends State<Signup> {
                         height: 20,
                       ),
                       TextFormField(
-                        controller: firstnameController,
+                        controller: nameController,
                         decoration: const InputDecoration(
                           border: OutlineInputBorder(),
-                          hintText: 'First Name',
+                          hintText: 'Name',
                           hintStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: lGrey),
                         ),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Please Enter First Name';
-                          }
-                          return null;
-                        },
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      TextFormField(
-                        controller: lastnameController,
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          hintText: 'Last Name',
-                          hintStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: lGrey),
-                        ),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please Enter Last Name';
                           }
                           return null;
                         },
@@ -170,13 +180,7 @@ class _SignupState extends State<Signup> {
                         height: 50,
                       ),
                       GestureDetector(
-                        onTap: () {
-                          if (formKey.currentState!.validate()) {
-                            userLogin();
-
-                            //  Navigator.push(context, MaterialPageRoute(builder: (context)=>QA_walk()));
-                          }
-                        },
+                        onTap: () {},
                         child: Column(
                           children: [
                             GestureDetector(
@@ -188,23 +192,32 @@ class _SignupState extends State<Signup> {
                                     const Center(child: Text('Sign Up', style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500, color: yellow))),
                               ),
                               onTap: () {
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
+                                if (formKey.currentState!.validate()) {
+                                  registerEmail();
+
+                                  //  Navigator.push(context, MaterialPageRoute(builder: (context)=>QA_walk()));
+                                }
                               },
                             ),
                             Padding(
                               padding: const EdgeInsets.only(left: 20, top: 10),
                               child: Row(
-                                children: const [
-                                  Text(
+                                children: [
+                                  const Text(
                                     'Already have an account?',
                                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: lGrey),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 10,
                                   ),
-                                  Text(
-                                    'Log In',
-                                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: kala),
+                                  InkWell(
+                                    onTap: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: const Text(
+                                      'Log In',
+                                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: kala),
+                                    ),
                                   )
                                 ],
                               ),

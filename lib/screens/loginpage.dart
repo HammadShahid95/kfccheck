@@ -96,7 +96,7 @@ class _LoginpageState extends State<Loginpage> {
                     ),
                   ),
                   onTap: (() {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => LogIn()));
                   }),
                 ),
               ),

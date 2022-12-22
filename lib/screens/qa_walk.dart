@@ -14,6 +14,8 @@ import 'package:kfccheck/screens/walk_per_weak.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
+import 'adminlogin.dart';
+
 class QA_walk extends StatefulWidget {
   const QA_walk({super.key});
 
@@ -89,7 +91,7 @@ class _QA_walkState extends State<QA_walk> {
                   )),
                 ),
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => LogIn()));
                 },
               ),
             ),
