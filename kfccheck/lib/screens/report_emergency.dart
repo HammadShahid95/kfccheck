@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:kfccheck/res/const.dart';
 import 'package:kfccheck/screens/admindashboard.dart';
 import 'package:kfccheck/screens/roles.dart';
-
+var emergencySend;
 class Report extends StatefulWidget {
   Report({super.key});
 
@@ -82,6 +82,7 @@ int groupValue = -1;
                                         color: Colors.white,
                                         child:  ListTile(
                                           title: Text(emergencies[index]),
+
                                           trailing: Radio<int>(
                                             value: answers[index]!,
                                             groupValue: groupValue,
@@ -90,6 +91,8 @@ int groupValue = -1;
                                                 groupValue = value!;
 
                                               });
+                                              emergencySend = emergencies[index];
+                                              print("emergency == $emergencySend");
                                               Timer(Duration(seconds: 1), () =>    groupValue != -1? Navigator.push(context, MaterialPageRoute(builder: (context)=> Roles())):Container());                                          },
                                           ),
                                         )

@@ -67,7 +67,7 @@ bool isFieldShow = false;
                 Stack(
                     children: [
                       Container(
-                        width: 374,
+                        width: 414,
                         height: 204,
                         decoration: const BoxDecoration(color: black),
                         child: Padding(
@@ -94,8 +94,8 @@ bool isFieldShow = false;
                         child: Padding(
                           padding: const EdgeInsets.only(top: 120),
                           child: Container(
-                            width: 374,
-                            height: 580,
+                            width: 414,
+                            height: 600,
                             decoration: const BoxDecoration(
                               borderRadius: BorderRadius.only(
                                   topLeft: Radius.circular(20),

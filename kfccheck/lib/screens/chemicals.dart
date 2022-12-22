@@ -67,7 +67,7 @@ class _ChemicalState extends State<Chemical> {
         child: Padding(
           padding: const EdgeInsets.only(top: 120),
           child: Container(
-            width: 374,
+            width: 414,
             height: 600,
             decoration: const BoxDecoration(
               borderRadius: BorderRadius.only(
@@ -270,35 +270,35 @@ class _ChemicalState extends State<Chemical> {
                                     const  SizedBox(
                                         width: 10,
                                       ),
-                                      Container(
-                                        width: 67,
-                                        height: 20,
-                                        decoration: const BoxDecoration(
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(10)),
-                                            color: Silver),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          children: [
-                                            InkWell(
-                                              onTap: () {
-                                                getFromCamera();
-                                              },
-                                              child:const Icon(
+                                      InkWell(
+                                        child: Container(
+                                          width: 67,
+                                          height: 20,
+                                          decoration: const BoxDecoration(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(10)),
+                                              color: Silver),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            children:const [
+                                               Icon(
                                                   Icons.camera_alt_outlined,
                                                   color: white,
                                                   size: 15),
-                                            ),
-                                          const  Text(
-                                              'Image',
-                                              style: TextStyle(
-                                                  fontSize: 10,
-                                                  fontWeight: FontWeight.w400,
-                                                  color: white),
-                                            )
-                                          ],
+                                              Text(
+                                                'Image',
+                                                style: TextStyle(
+                                                    fontSize: 10,
+                                                    fontWeight: FontWeight.w400,
+                                                    color: white),
+                                              )
+                                            ],
+                                          ),
                                         ),
+                                          onTap: () {
+                                            getFromCamera();
+                                          },
                                       ),
                                       const SizedBox(
                                         width: 10,

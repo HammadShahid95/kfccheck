@@ -60,7 +60,7 @@ class _ContaminationState extends State<Contamination> {
                 Stack(
                     children: [
                       Container(
-                        width: 374,
+                        width: 414,
                         height: 204,
                         decoration: const BoxDecoration(color: black),
                         child: Padding(
@@ -72,7 +72,7 @@ class _ContaminationState extends State<Contamination> {
                                   Navigator.push(context, MaterialPageRoute(builder: (context)=> Inspection()));
                                 },
                               ),
-                              Text(
+                             const Text(
                                 'Protection from Contamination',
                                 style: TextStyle(
                                     fontSize: 22,
@@ -87,8 +87,8 @@ class _ContaminationState extends State<Contamination> {
                         child: Padding(
                           padding: const EdgeInsets.only(top: 120),
                           child: Container(
-                            width: 374,
-                            height: 580,
+                            width: 414,
+                            height: 600,
                             decoration: const BoxDecoration(
                               borderRadius: BorderRadius.only(
                                   topLeft: Radius.circular(20),
