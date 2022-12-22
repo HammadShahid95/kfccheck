@@ -8,6 +8,8 @@ import 'package:kfccheck/res/const.dart';
 import 'package:kfccheck/res/static_info.dart';
 import 'package:kfccheck/screens/qa_walk.dart';
 
+import 'approval_page.dart';
+
 class Signup extends StatefulWidget {
   const Signup({Key? key}) : super(key: key);
 
@@ -16,7 +18,8 @@ class Signup extends StatefulWidget {
 }
 
 class _SignupState extends State<Signup> {
-  final User = FirebaseAuth.instance.currentUser;
+  final _firbeaseAuth = FirebaseAuth.instance;
+  final _firebaseStore = FirebaseFirestore.instance;
   bool isLoading = false;
   bool isShow = false;
   bool check = false;
@@ -28,14 +31,7 @@ class _SignupState extends State<Signup> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    getValues();
-  }
-
-  void getValues() async {
-    nameController.text = await getValue("Name");
-    emailController.text = await getValue("Email");
   }
 
   Future<void> save(String key, String value) async {
@@ -47,43 +43,34 @@ class _SignupState extends State<Signup> {
   }
 
   void saveDetails() {
-    save("Name", nameController.text);
+    save("Password", passwordController.text);
     save("Email", emailController.text);
   }
 
   registerEmail() async {
-    isLoading = true;
-    setState(() {});
-    bool userNameExists;
-    bool passwordExists;
+    setState(() {
+      isLoading = true;
+    });
     try {
-      var authResult = await FirebaseFirestore.instance.collection(StaticInfo.users).where('email', isEqualTo: emailController.text).get();
-      userNameExists = authResult.docs.isNotEmpty;
-      if (userNameExists) {
-        var authResult = await FirebaseFirestore.instance.collection(StaticInfo.users).where('password', isEqualTo: passwordController.text).get();
-        passwordExists = authResult.docs.isNotEmpty;
-        if (passwordExists) {
-          isLoading = false;
-          setState(() {});
-          Fluttertoast.showToast(msg: 'Successfully logged in');
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => QA_walk()),
-          );
-        } else {
-          isLoading = false;
-          setState(() {});
-          Fluttertoast.showToast(msg: 'Incorrect email or password');
-        }
-      } else {
-        isLoading = false;
-        setState(() {});
-        Fluttertoast.showToast(msg: 'Incorrect email or password');
+      UserCredential user = await _firbeaseAuth.createUserWithEmailAndPassword(email: emailController.text, password: passwordController.text);
+      if (user.user != null) {
+        saveDetails();
+        var docRef = _firebaseStore.collection('users').doc(user.user?.uid);
+        docRef.set({
+          'role': 'admin',
+          'name': nameController.text,
+          'isApproved': false,
+          'docId': user.user?.uid,
+        });
       }
+      setState(() {
+        isLoading = false;
+      });
+      Fluttertoast.showToast(msg: 'Sign up Successfully');
+      Navigator.push(context, MaterialPageRoute(builder: (context) => ApprovalAwaitPage()));
     } catch (e) {
-      isLoading = false;
-      setState(() {});
-      Fluttertoast.showToast(msg: 'Some error occurred');
+      print(e.toString());
+      Fluttertoast.showToast(msg: 'Some Error: $e');
     }
   }
 

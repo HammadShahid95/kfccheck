@@ -11,8 +11,8 @@ import 'package:kfccheck/screens/report_emergency.dart';
 import 'package:kfccheck/screens/walk_per_weak.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
-
 import 'adminlogin.dart';
+import 'menu_bar.dart';
 
 class Admin extends StatefulWidget {
   const Admin({super.key});
@@ -104,7 +104,12 @@ class _Admin extends State<Admin> {
                   )),
                 ),
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => LogIn()));
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => LogIn(
+                                role: 'admin',
+                              )));
                 },
               ),
             ),

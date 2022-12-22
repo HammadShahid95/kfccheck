@@ -91,7 +91,12 @@ class _QA_walkState extends State<QA_walk> {
                   )),
                 ),
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => LogIn()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => LogIn(
+                                role: 'teammember',
+                              )));
                 },
               ),
             ),

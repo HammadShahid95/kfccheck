@@ -65,7 +65,12 @@ class _LoginpageState extends State<Loginpage> {
                     ),
                   ),
                   onTap: (() {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => LogIn()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => LogIn(
+                                  role: 'admin',
+                                )));
                   }),
                 ),
               ),
@@ -96,7 +101,12 @@ class _LoginpageState extends State<Loginpage> {
                     ),
                   ),
                   onTap: (() {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => LogIn()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => LogIn(
+                                  role: 'teammember',
+                                )));
                   }),
                 ),
               ),

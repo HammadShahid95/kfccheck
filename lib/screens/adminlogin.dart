@@ -9,7 +9,8 @@ import 'package:kfccheck/screens/admindashboard.dart';
 import 'package:kfccheck/screens/qa_walk.dart';
 
 class LogIn extends StatefulWidget {
-  const LogIn({Key? key}) : super(key: key);
+  final String role;
+  const LogIn({Key? key, required this.role}) : super(key: key);
 
   @override
   State<LogIn> createState() => _LogInState();

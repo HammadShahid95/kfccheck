@@ -1,7 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:kfccheck/login.dart';
 import 'package:kfccheck/res/const.dart';
+import 'package:kfccheck/screens/admindashboard.dart';
+import 'package:kfccheck/screens/approval_page.dart';
 import 'package:kfccheck/screens/loginpage.dart';
+import 'package:kfccheck/screens/qa_walk.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -9,10 +15,33 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreen extends State<SplashScreen> {
+  final FlutterSecureStorage secureStorage = const FlutterSecureStorage();
+  final FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+  final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+
   @override
   void initState() {
     super.initState();
-    // Timer(Duration(seconds: 3), () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => QA_walk())));
+    verify();
+  }
+
+  verify() async {
+    var email = await secureStorage.read(key: 'Email');
+    var password = await secureStorage.read(key: 'Password');
+    if (email != null && password != null) {
+      UserCredential user = await firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
+      if (user.user != null) {
+        var doc = firebaseFirestore.collection('users').doc(user.user?.uid);
+        var data = await doc.get();
+        if (data['isApproved'] && data['role'] == 'admin') {
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Admin()));
+        } else if (data['isApproved'] && data['teammember']) {
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => QA_walk()));
+        } else if (!data['isApproved']) {
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ApprovalAwaitPage()));
+        }
+      }
+    }
   }
 
   @override
